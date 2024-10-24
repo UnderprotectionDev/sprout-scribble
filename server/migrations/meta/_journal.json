@@ -8,6 +8,41 @@
       "when": 1729621202673,
       "tag": "0000_safe_tigra",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "6",
+      "when": 1729685685488,
+      "tag": "0001_hard_sue_storm",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "6",
+      "when": 1729711601988,
+      "tag": "0002_high_brood",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "6",
+      "when": 1729711683771,
+      "tag": "0003_numerous_photon",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "6",
+      "when": 1729762240314,
+      "tag": "0004_empty_lifeguard",
+      "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "6",
+      "when": 1729762986825,
+      "tag": "0005_late_scrambler",
+      "breakpoints": true
     }
   ]
 }

@@ -25,15 +25,14 @@ import FormSuccess from "./FormSuccess";
 import FormError from "./FormError";
 
 const RegisterForm = () => {
-  const form = useForm({
+  const form = useForm<z.infer<typeof RegisterSchema>>({
     resolver: zodResolver(RegisterSchema),
     defaultValues: {
-      name: "",
       email: "",
       password: "",
+      name: "",
     },
   });
-
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
   const { execute, status } = useAction(emailRegister, {
@@ -44,8 +43,10 @@ const RegisterForm = () => {
   });
 
   const onSubmit = (values: z.infer<typeof RegisterSchema>) => {
+    console.log("before server action runs");
     execute(values);
   };
+
   return (
     <AuthCard
       cardTitle="Create an account 🎉"
@@ -64,7 +65,11 @@ const RegisterForm = () => {
                   <FormItem>
                     <FormLabel>Username</FormLabel>
                     <FormControl>
-                      <Input placeholder="sprout" {...field} type="text" />
+                      <Input
+                        {...field}
+                        placeholder="developedbyed"
+                        type="text"
+                      />
                     </FormControl>
                     <FormDescription />
                     <FormMessage />
@@ -79,8 +84,8 @@ const RegisterForm = () => {
                     <FormLabel>Email</FormLabel>
                     <FormControl>
                       <Input
-                        placeholder="...@gmail.com"
                         {...field}
+                        placeholder="developedbyed@gmail.com"
                         type="email"
                         autoComplete="email"
                       />
@@ -98,8 +103,8 @@ const RegisterForm = () => {
                     <FormLabel>Password</FormLabel>
                     <FormControl>
                       <Input
-                        placeholder="***********"
                         {...field}
+                        placeholder="*********"
                         type="password"
                         autoComplete="current-password"
                       />

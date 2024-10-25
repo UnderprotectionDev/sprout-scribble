@@ -12,23 +12,23 @@ import {
 } from "../ui/form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import AuthCard from "./AuthCard";
-import { LoginSchema } from "@/types/login-schema";
 import * as z from "zod";
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
 import Link from "next/link";
 import { useAction } from "next-safe-action/hooks";
-import { emailSignIn } from "@/server/actions/emailSignIn";
 import { cn } from "@/lib/utils";
 import { useState } from "react";
 import FormSuccess from "./FormSuccess";
 import FormError from "./FormError";
+import { NewPasswordSchema } from "@/types/new-password-schema";
+import { newPassword } from "@/server/actions/newPassword";
+import { useSearchParams } from "next/navigation";
 
-const LoginForm = () => {
-  const form = useForm({
-    resolver: zodResolver(LoginSchema),
+const NewPasswordForm = () => {
+  const form = useForm<z.infer<typeof NewPasswordSchema>>({
+    resolver: zodResolver(NewPasswordSchema),
     defaultValues: {
-      email: "",
       password: "",
     },
   });
@@ -36,46 +36,30 @@ const LoginForm = () => {
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
 
-  const { execute, status } = useAction(emailSignIn, {
+  const searchParams = useSearchParams();
+  const token = searchParams.get("token");
+
+  const { execute, status } = useAction(newPassword, {
     onSuccess: (data) => {
       if (data?.error) setError(data.error);
       if (data?.success) setSuccess(data.success);
     },
   });
 
-  const onSubmit = (values: z.infer<typeof LoginSchema>) => {
-    execute(values);
+  const onSubmit = (values: z.infer<typeof NewPasswordSchema>) => {
+    execute({ password: values.password, token });
   };
   return (
     <AuthCard
-      cardTitle="Welcome Back!"
-      backButtonHref="/auth/register"
-      backButtonLabel="Create a new account"
+      cardTitle="Enter a new password"
+      backButtonHref="/auth/login"
+      backButtonLabel="Back to login"
       showSocials
     >
       <div>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)}>
             <div>
-              <FormField
-                control={form.control}
-                name="email"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Email</FormLabel>
-                    <FormControl>
-                      <Input
-                        placeholder="...@gmail.com"
-                        {...field}
-                        type="email"
-                        autoComplete="email"
-                      />
-                    </FormControl>
-                    <FormDescription />
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
               <FormField
                 control={form.control}
                 name="password"
@@ -108,7 +92,7 @@ const LoginForm = () => {
                 status === "executing" ? "animate-pulse" : ""
               )}
             >
-              {"Login"}
+              Reset Password
             </Button>
           </form>
         </Form>
@@ -117,4 +101,4 @@ const LoginForm = () => {
   );
 };
 
-export default LoginForm;
+export default NewPasswordForm;

@@ -43,6 +43,27 @@
       "when": 1729762986825,
       "tag": "0005_late_scrambler",
       "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "6",
+      "when": 1729779421200,
+      "tag": "0006_easy_colossus",
+      "breakpoints": true
+    },
+    {
+      "idx": 7,
+      "version": "6",
+      "when": 1729791627153,
+      "tag": "0007_silent_sebastian_shaw",
+      "breakpoints": true
+    },
+    {
+      "idx": 8,
+      "version": "6",
+      "when": 1729791641094,
+      "tag": "0008_fat_wonder_man",
+      "breakpoints": true
     }
   ]
 }

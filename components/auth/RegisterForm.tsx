@@ -67,7 +67,7 @@ const RegisterForm = () => {
                     <FormControl>
                       <Input
                         {...field}
-                        placeholder="developedbyed"
+                        placeholder="underprotection"
                         type="text"
                       />
                     </FormControl>
@@ -85,7 +85,7 @@ const RegisterForm = () => {
                     <FormControl>
                       <Input
                         {...field}
-                        placeholder="developedbyed@gmail.com"
+                        placeholder="...@gmail.com"
                         type="email"
                         autoComplete="email"
                       />

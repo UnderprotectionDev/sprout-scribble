@@ -1,19 +1,13 @@
 import type { Metadata } from "next";
-import localFont from "next/font/local";
 import "./globals.css";
 import Nav from "@/components/navigation/Nav";
-import { cn } from "@/lib/utils";
+import { Roboto } from "next/font/google";
 import { ThemeProvider } from "@/components/providers/theme-provider";
+import Toaster from "@/components/ui/toaster";
 
-const geistSans = localFont({
-  src: "./fonts/GeistVF.woff",
-  variable: "--font-geist-sans",
-  weight: "100 900",
-});
-const geistMono = localFont({
-  src: "./fonts/GeistMonoVF.woff",
-  variable: "--font-geist-mono",
-  weight: "100 900",
+const roboto = Roboto({
+  weight: ["400", "500", "700", "900"],
+  subsets: ["latin"],
 });
 
 export const metadata: Metadata = {
@@ -28,21 +22,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body
-        className={cn(
-          "px-6 md:px-12 max-w-7xl mx-auto",
-          `${geistSans.variable} ${geistMono.variable}`
-        )}
-      >
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
-          <Nav />
+      <body className={roboto.className}>
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+          <div className="flex-grow px-6 md:px-12 mx-auto max-w-8xl">
+            <Nav />
+            <Toaster />
+            {children}
+          </div>
         </ThemeProvider>
-        {children}
       </body>
     </html>
   );
